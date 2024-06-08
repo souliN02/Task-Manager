@@ -1,6 +1,6 @@
 # Task-Manager Web Application
  
-This project is made as a part of a internship trial, that will demonstrate my web development skills. The goal is to create a simple web application for managing tasks, where a user should be able to create an account, log in, create, read, update and delete tasks. Here you can read the more specific requirements given by the company:
+This project is made as a part of an internship trial, that will demonstrate my web development skills. The goal is to create a simple web application for managing tasks, where a user should be able to create an account, log in, create, read, update and delete tasks. Here you can read the more specific requirements given by the company:
 
 ## 1. User Authentication
 * Users should be able to register with their email and password.
