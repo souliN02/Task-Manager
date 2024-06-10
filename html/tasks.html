@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tasks</title>
+    <link rel="stylesheet" type="text/css" href="../style/task-style.css">
 </head>
 <body>
-    tasks page
+    <h1>Tasks</h1>
+
+    <!-- Create task form -->
+    <form id="create-task-form" action="/tasks" method="post">
+      <input type="text" name="description" placeholder="Task description">
+      <button type="submit">Create task</button>
+    </form>
+  
+    <!-- Task list -->
+    <ul id="task-list">
+      <!-- Tasks will be inserted here -->
+    </ul>
+  
+    <!-- Logout button -->
     <form action="/logout" method="get">
-        <button type="submit">Logout</button>
-      </form>
-</body>
+      <button type="submit">Logout</button>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../scripts/main.js"></script>
+
+
+  </body>
 </html>
