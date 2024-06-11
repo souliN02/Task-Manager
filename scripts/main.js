@@ -31,7 +31,7 @@ $(document).ready(function() {
             $('#task-list').append(`
                 <li>
                     ${data.description}
-                    <button onclick="updateTask(${data.id})">Update</button>
+                    <button onclick="updateTask(${data.id})">Edit</button>
                     <button onclick="deleteTask(${data.id})">Delete</button>
                 </li>
             `);
