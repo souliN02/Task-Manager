@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Registration Page</title>
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="../style/style.css">
 </head>
+
 <body>
+    <!-- Registration form container -->
     <div class="register-page">
         <div class="form">
+            <!-- Registration form -->
             <form class="register-form" action="/register" method="POST">
+                <!--Form input fields-->
                 <input type="text" name="email" placeholder="email"/>
                 <input type="password" name="password" placeholder="password"/>
                 <input type="password" name="passwordConfirmation" placeholder="confirm password"/>
+                <!-- Submit button -->
                 <button type="submit">create</button>
+                <!-- Login redirect -->
                 <p class="message">Already registered? <a href="/login">Login here</a></p>
-              </form>
+            </form>
         </div>
     </div>
 </body>
+
 </html>
