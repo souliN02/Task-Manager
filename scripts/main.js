@@ -4,6 +4,7 @@ $(document).ready(function() {
         $('#user-name').text(data.name);
     });
 
+    // Fetch and display the tasks
     $.get('/tasks-data', (tasks) => {
         tasks.forEach((task) => {
             $('#task-list').append(`
@@ -16,6 +17,7 @@ $(document).ready(function() {
         });
     });
 
+    // Handle form submission
     $('#create-task-form').submit(function(event) {
         event.preventDefault();
 
@@ -37,6 +39,7 @@ $(document).ready(function() {
     });
 });
 
+// Update task function
 function updateTask(id) {
     const newDescription = prompt('Enter new task description');
     if (newDescription) {
@@ -51,6 +54,7 @@ function updateTask(id) {
     }
 }
 
+// Delete task function
 function deleteTask(id) {
     $.ajax({
         url: '/tasks/' + id,

@@ -8,9 +8,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Serve static files
 app.use('/style', express.static(__dirname + '/style'));
 app.use('/scripts', express.static(__dirname + '/scripts'));
 
+// Use the session middleware
 app.use(session({
   secret: 'your secret key',
   resave: false,
@@ -18,6 +20,7 @@ app.use(session({
   cookie: { secure: false }
 }));
 
+// Connect to the database
 let db = new sqlite3.Database('./db/users.db', (err) => {
   if (err) {
     console.error(err.message);
@@ -25,18 +28,21 @@ let db = new sqlite3.Database('./db/users.db', (err) => {
   console.log('Connected to the users database.');
 });
 
+// Create the users table if it doesn't exist
 db.run(`CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email text NOT NULL,
     password text NOT NULL
 );`);
 
+// Create the tasks table if it doesn't exist
 db.run(`CREATE TABLE IF NOT EXISTS tasks(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   description text NOT NULL,
   userId INTEGER,
   FOREIGN KEY(userId) REFERENCES users(id)
 );`);
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/html/register.html');
@@ -47,6 +53,7 @@ app.post('/register', (req, res) => {
     return res.send('Passwords do not match');
   }
 
+  // Insert the user into the database
   db.run(`INSERT INTO users(email, password) VALUES(?,?)`, [req.body.email, req.body.password], function(err) {
     if (err) {
       return console.log(err.message);
@@ -56,10 +63,12 @@ app.post('/register', (req, res) => {
   });
 });
 
+// Login route
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/html/login.html');
 });
 
+// Login route
 app.post('/login', (req, res) => {
   db.get(`SELECT * FROM users WHERE email = ? AND password = ?`, [req.body.email, req.body.password], (err, row) => {
     if (err) {
@@ -74,6 +83,7 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Tasks route
 app.get('/tasks', (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
@@ -118,6 +128,7 @@ app.post('/tasks', (req, res) => {
   });
 });
 
+// Update task route
 app.put('/tasks/:id', (req, res) => {
   db.run(`UPDATE tasks SET description = ? WHERE id = ?`, [req.body.description, req.params.id], function(err) {
     if (err) {
@@ -128,6 +139,7 @@ app.put('/tasks/:id', (req, res) => {
   });
 });
 
+// Delete task route
 app.delete('/tasks/:id', (req, res) => {
   db.run(`DELETE FROM tasks WHERE id = ?`, req.params.id, function(err) {
     if (err) {
@@ -138,6 +150,7 @@ app.delete('/tasks/:id', (req, res) => {
   });
 });
 
+// Logout route
 app.get('/logout', (req, res) => {
   req.session.destroy(); // Destroy the session to log the user out
   res.redirect('/login');

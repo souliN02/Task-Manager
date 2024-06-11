@@ -29,6 +29,7 @@ form {
     margin-bottom: 20px;
 }
 
+/* Input styles */
 input[type="text"] {
     flex: 1;
     padding: 10px;
@@ -37,6 +38,7 @@ input[type="text"] {
     margin-right: 10px;
 }
 
+/* Button styles */
 button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -57,6 +59,7 @@ ul {
     padding: 0;
 }
 
+/* Task item styles */
 li {
     display: flex;
     justify-content: space-between;
